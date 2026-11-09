@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chevy, the magazine</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #fffefe;
+      color: #1f1b19;
+      overflow-x: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      border-right: 2px solid #1f1b19;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      background: #fffefe;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .brand-header {
+      min-height: 118px;
+      padding: 20px;
+      border-bottom: 1px solid #1f1b19;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .brand-title {
+      font-family: 'Danfo', serif;
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 400;
+      text-decoration: none;
+      color: #1f1b19;
+      display: block;
+    }
+
+    .category-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .category-item {
+      border-bottom: 1px solid #1f1b19;
+    }
+
+    .category-link {
+      display: block;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #1f1b19;
+      text-decoration: none;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .category-link:hover {
+      background-color: #1f1b19;
+      color: #fffefe;
+    }
+
+    /* Right Wrapper (Magazine News + Main Content) */
+    .right-column {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Magazine News Bar (Static color on hover, Top on PC, Fixed Bottom on Phone) */
+    .magazine-news {
+      min-height: 118px;
+      padding: 20px 40px;
+      border-bottom: 1px solid #1f1b19;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #fffefe;
+      color: #1f1b19;
+      flex-shrink: 0;
+      cursor: pointer;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .magazine-news-title {
+      font-family: 'Danfo', serif;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      color: #1f1b19;
+    }
+
+    .magazine-news-snippet {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #222222;
+      line-height: 1.4;
+    }
+
+    /* Main Area */
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 30px;
+    }
+
+    .article-card {
+      border: 1px solid #1f1b19;
+      padding: 20px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: #fffefe;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 3px 3px 0px #1f1b19;
+    }
+
+    .card-category {
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-align: left;
+    }
+
+    .card-title {
+      font-family: 'Danfo', serif;
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 6px;
+      line-height: 1.2;
+      text-align: center;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .card-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #555555;
+      margin-bottom: 12px;
+      text-align: center;
+      overflow-wrap: break-word;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border: 1px solid #1f1b19;
+      margin: 0 auto 12px auto;
+      display: block;
+    }
+
+    .card-snippet {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: #222222;
+      line-height: 1.4;
+      text-align: center;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    /* Detailed Article View */
+    #detail-view {
+      display: none;
+      width: 100%;
+      margin: 0;
+      text-align: left;
+    }
+
+    .detail-category {
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .article-header-box {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      text-align: center;
+    }
+
+    .detail-title {
+      font-family: 'Danfo', serif;
+      font-size: 44px;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-align: center;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .detail-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #444444;
+      margin-bottom: 20px;
+      text-align: center;
+      overflow-wrap: break-word;
+    }
+
+    .detail-image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+      border: 1px solid #1f1b19;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .detail-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.6;
+      text-align: left;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .empty-state {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .empty-title {
+      font-family: 'Danfo', serif;
+      font-size: 48px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .empty-smiley {
+      font-family: 'Danfo', serif;
+      font-size: 64px;
+      font-weight: 400;
+    }
+
+    .corner-text {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      background-color: #fffefe;
+      border: 1px solid #1f1b19;
+      padding: 6px 12px;
+      z-index: 100;
+    }
+
+    /* Mobile Version */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px solid #1f1b19;
+      }
+
+      .brand-header {
+        min-height: auto;
+        padding: 20px 15px;
+      }
+
+      .brand-title {
+        font-size: 30px;
+      }
+
+      .category-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow-y: visible;
+      }
+
+      .category-link {
+        padding: 12px 10px;
+        font-size: 16px;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-all {
+        grid-column: 1 / -1;
+        order: 1;
+      }
+
+      .nav-cat-1 { order: 2; border-right: 1px solid #1f1b19; }
+      .nav-cat-2 { order: 3; }
+      .nav-cat-3 { order: 4; border-right: 1px solid #1f1b19; }
+      .nav-cat-4 { order: 5; }
+
+      .nav-cat-5 {
+        grid-column: 1 / -1;
+        order: 6;
+      }
+
+      .nav-about {
+        grid-column: 1 / -1;
+        order: 7;
+      }
+
+      .nav-donate {
+        order: 8;
+        border-right: 1px solid #1f1b19;
+        border-bottom: none;
+      }
+
+      .nav-publish {
+        order: 9;
+        border-bottom: none;
+      }
+
+      .right-column {
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      .main-content {
+        order: 1;
+        padding: 28px 16px 120px 16px;
+      }
+
+      .magazine-news {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-height: auto;
+        padding: 12px 16px;
+        border-top: 2px solid #1f1b19;
+        border-bottom: none;
+        background-color: #fffefe;
+        align-items: center;
+        text-align: center;
+        z-index: 200;
+      }
+
+      .magazine-news-title {
+        font-size: 22px;
+      }
+
+      .magazine-news-snippet {
+        font-size: 14px;
+      }
+
+      .detail-title {
+        font-size: 32px;
+      }
+
+      .detail-body {
+        font-size: 16px;
+      }
+
+      .corner-text {
+        bottom: 85px;
+        right: 10px;
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand-header">
+      <a href="index.html" class="brand-title">CHEVY<br>the Magazine</a>
+    </div>
+    
+    <ul class="category-list">
+      <li class="category-item nav-all"><a href="#all" class="category-link" onclick="filterArticles('all'); return false;">All Articles</a></li>
+      <li class="category-item nav-cat-1"><a href="#news" class="category-link" onclick="filterArticles('news'); return false;">News \ Politics</a></li>
+      <li class="category-item nav-cat-2"><a href="#art" class="category-link" onclick="filterArticles('art'); return false;">Art \ Photography</a></li>
+      <li class="category-item nav-cat-3"><a href="#books" class="category-link" onclick="filterArticles('books'); return false;">Books \ Poetry</a></li>
+      <li class="category-item nav-cat-4"><a href="#fashion" class="category-link" onclick="filterArticles('fashion'); return false;">Fashion \ Trends</a></li>
+      <li class="category-item nav-cat-5"><a href="#music" class="category-link" onclick="filterArticles('music'); return false;">Music</a></li>
+      <li class="category-item nav-about"><a href="page3.html" class="category-link">About the magazine</a></li>
+      <li class="category-item nav-publish"><a href="page2.html" class="category-link">Publish Your Article</a></li>
+      <li class="category-item nav-donate"><a href="page4.html" class="category-link">Donate</a></li>
+    </ul>  
+  </aside>
+    
+  <!-- Right Column Wrapper -->
+  <div class="right-column">
+
+    <!-- MAGAZINE NEWS BAR -->
+    <div id="magazine-news" class="magazine-news" onclick="openMagazineNews()">
+      <h2 id="magazine-news-title" class="magazine-news-title"></h2>
+      <p id="magazine-news-snippet" class="magazine-news-snippet"></p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <!-- Feed View (Cards) -->
+      <div id="feed-view">
+        <div class="articles-grid">
+          <!-- ARTICLES_START -->
+
+        <div class="article-card" data-category="news-politics" onclick="openArticle('Chevy', 'News%5CPolitics', 'Chevy', 'C%3A%2FUsers%2Flenovo%2FPictures%2FScreenshots%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-09-26%20233021.png', 'ChevyChevyChevyChevyChevy')">
+          <div class="card-category">News\Politics</div>
+          <h2 class="card-title">Chevy</h2>
+          <div class="card-author">Chevy</div>
+          <img src="C:/Users/lenovo/Pictures/Screenshots/Снимок экрана 2026-09-26 233021.png" alt="Chevy" class="card-image">
+          <p class="card-snippet">ChevyChevyChevyChevyChevy</p>
+        </div>
+      
+<!-- ARTICLES_END -->
+        </div>
+      </div>
+
+      <!-- Detailed Article View -->
+      <div id="detail-view">
+        <div id="detail-content"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state" style="display: none;">
+        <h2 class="empty-title">No Articles Yet</h2>
+        <div class="empty-smiley">:(</div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="corner-text">made with love!!!<br>chevy vol.1</div>
+
+  <script>
+    const magazineNewsData = {
+      title: "Chevy has launched!!!",
+      text: "After a few months, our 'Chevy' is finally launched! I'm so happy to announce the start of our magazine. To read more and/or ask questions, read the 'About the Magazine' page! We are open to pitches."
+    };
+
+    let currentCategory = 'all';
+
+    function initMagazineNews() {
+      const titleEl = document.getElementById('magazine-news-title');
+      const snippetEl = document.getElementById('magazine-news-snippet');
+      
+      titleEl.textContent = magazineNewsData.title;
+      
+      const shortText = magazineNewsData.text.substring(0, 50) + (magazineNewsData.text.length > 50 ? '...' : '');
+      snippetEl.textContent = shortText;
+    }
+
+    function openMagazineNews() {
+      document.getElementById('feed-view').style.display = 'none';
+      document.getElementById('empty-state').style.display = 'none';
+
+      const detailContainer = document.getElementById('detail-content');
+      detailContainer.innerHTML = `
+        <div class="article-header-box">
+          <h1 class="detail-title">${magazineNewsData.title}</h1>
+        </div>
+        <div class="detail-body">${magazineNewsData.text}</div>
+      `;
+
+      document.getElementById('detail-view').style.display = 'block';
+      const rightCol = document.querySelector('.right-column');
+      if (rightCol) rightCol.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+
+    function filterArticles(targetCategory) {
+      currentCategory = targetCategory.toLowerCase();
+      document.getElementById('detail-view').style.display = 'none';
+      document.getElementById('feed-view').style.display = 'block';
+
+      const cards = document.querySelectorAll('.article-card');
+      const emptyState = document.getElementById('empty-state');
+      
+      let visibleCount = 0;
+      
+      cards.forEach(card => {
+        const cardCat = (card.getAttribute('data-category') || '').toLowerCase();
+        
+        if (currentCategory === 'all' || cardCat.includes(currentCategory)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    function openArticle(title, category, author, image, body) {
+      document.getElementById('feed-view').style.display = 'none';
+      document.getElementById('empty-state').style.display = 'none';
+      
+      const decodedTitle = decodeURIComponent(title);
+      const decodedCategory = decodeURIComponent(category);
+      const decodedAuthor = decodeURIComponent(author);
+      const decodedImage = decodeURIComponent(image);
+      const decodedBody = decodeURIComponent(body);
+
+      const detailContainer = document.getElementById('detail-content');
+      detailContainer.innerHTML = `
+        <div class="detail-category">${decodedCategory}</div>
+        
+        <div class="article-header-box">
+          <h1 class="detail-title">${decodedTitle}</h1>
+          ${decodedAuthor ? `<div class="detail-author">${decodedAuthor}</div>` : ''}
+          ${decodedImage ? `<img src="${decodedImage}" class="detail-image" alt="${decodedTitle}">` : ''}
+        </div>
+
+        <div class="detail-body">${decodedBody}</div>
+      `;
+      
+      document.getElementById('detail-view').style.display = 'block';
+      const rightCol = document.querySelector('.right-column');
+      if (rightCol) rightCol.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initMagazineNews();
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'magazine-news') {
+        openMagazineNews();
+      } else if (['all', 'news', 'art', 'books', 'fashion', 'music'].includes(hash)) {
+        filterArticles(hash);
+      }
+    });
+  </script>
+</body>
+</html>
