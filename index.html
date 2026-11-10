@@ -19,131 +19,139 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      display: flex;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       background-color: #fffefe;
       color: #1f1b19;
       overflow-x: hidden;
     }
 
-    /* Sidebar */
-    .sidebar {
-      width: 280px;
-      border-right: 2px solid #1f1b19;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      background: #fffefe;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-    }
-
-    .brand-header {
-      min-height: 118px;
-      padding: 20px;
-      border-bottom: 1px solid #1f1b19;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Top Header */
+    .top-header {
+      padding: 24px 40px 8px 40px;
+      position: relative;
       text-align: center;
     }
 
-    .brand-title {
-      font-family: 'Danfo', serif;
-      font-size: 32px;
-      line-height: 1.2;
-      font-weight: 400;
+    .brand-logo {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-end;
       text-decoration: none;
       color: #1f1b19;
-      display: block;
+      cursor: pointer;
     }
 
-    .category-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .category-item {
-      border-bottom: 1px solid #1f1b19;
-    }
-
-    .category-link {
-      display: block;
-      padding: 20px;
+    .brand-sub {
+      font-family: 'Danfo', serif;
       font-size: 18px;
       font-weight: 400;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      margin-bottom: -6px;
+    }
+
+    .brand-main {
+      font-family: 'Danfo', serif;
+      font-size: 82px;
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: 1px;
+    }
+
+    .popular-label {
+      font-size: 14px;
+      font-weight: 400;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    /* Popular Categories Bar */
+    .popular-nav {
+      border-top: 1px solid #1f1b19;
+      border-bottom: 1px solid #1f1b19;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .underlined-link {
+      font-size: 22px;
+      font-weight: 400;
       color: #1f1b19;
       text-decoration: none;
-      transition: background-color 0.2s, color 0.2s;
-    }
-
-    .category-link:hover {
-      background-color: #1f1b19;
-      color: #fffefe;
-    }
-
-    /* Right Wrapper (Magazine News + Main Content) */
-    .right-column {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      max-height: 100vh;
-      overflow-y: auto;
-    }
-
-    /* Magazine News Bar (Static color on hover, Top on PC, Fixed Bottom on Phone) */
-    .magazine-news {
-      min-height: 118px;
-      padding: 20px 40px;
-      border-bottom: 1px solid #1f1b19;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: #fffefe;
-      color: #1f1b19;
-      flex-shrink: 0;
+      padding-bottom: 6px;
+      position: relative;
       cursor: pointer;
-      overflow-wrap: break-word;
-      word-break: break-word;
+    }
+
+    .underlined-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background-color: #1f1b19;
+      transition: width 0.2s, left 0.2s;
+    }
+
+    .underlined-link:hover::after {
+      left: 0;
+      width: 100%;
+    }
+
+    /* Main Content Container */
+    .main-content {
+      flex-grow: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 36px 40px 60px 40px;
+    }
+
+    /* Magazine News Section */
+    .magazine-news {
+      text-align: center;
+      margin-bottom: 40px;
+      cursor: pointer;
     }
 
     .magazine-news-title {
       font-family: 'Danfo', serif;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
       color: #1f1b19;
     }
 
     .magazine-news-snippet {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
+      display: inline-block;
+      font-size: 18px;
       font-weight: 400;
-      color: #222222;
-      line-height: 1.4;
+      color: #1f1b19;
+      padding: 0 20px 6px 20px;
+      border-bottom: 1px solid #1f1b19;
+      min-width: 340px;
+      text-align: left;
     }
 
-    /* Main Area */
-    .main-content {
-      flex-grow: 1;
-      padding: 40px;
-      width: 100%;
-    }
-
+    /* Articles 4-Column Grid */
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 70px;
     }
 
     .article-card {
       border: 1px solid #1f1b19;
-      padding: 20px;
+      padding: 16px;
+      min-height: 260px;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
       background: #fffefe;
@@ -153,311 +161,281 @@
     }
 
     .article-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 3px 3px 0px #1f1b19;
+      transform: translateY(-3px);
+      box-shadow: 2px 2px 0px #1f1b19;
     }
 
     .card-category {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 400;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-align: left;
     }
 
     .card-title {
       font-family: 'Danfo', serif;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 400;
-      margin-bottom: 6px;
-      line-height: 1.2;
+      margin-bottom: 4px;
+      line-height: 1.15;
       text-align: center;
       overflow-wrap: break-word;
-      word-break: break-word;
     }
 
     .card-author {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 400;
       color: #555555;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-align: center;
-      overflow-wrap: break-word;
     }
 
     .card-image {
       width: 100%;
-      height: 200px;
+      height: 150px;
       object-fit: cover;
       border: 1px solid #1f1b19;
-      margin: 0 auto 12px auto;
+      margin: 0 auto 10px auto;
       display: block;
     }
 
     .card-snippet {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 400;
       color: #222222;
       line-height: 1.4;
       text-align: center;
       overflow-wrap: break-word;
-      word-break: break-word;
     }
 
-    /* Detailed Article View */
+    /* All Article Categories Section */
+    .all-categories-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .all-categories-heading {
+      display: inline-block;
+      font-family: 'Danfo', serif;
+      font-size: 36px;
+      font-weight: 400;
+      text-transform: uppercase;
+      padding: 0 12px 4px 12px;
+      border-bottom: 1px solid #1f1b19;
+      margin-bottom: 24px;
+      cursor: pointer;
+      color: #1f1b19;
+      text-decoration: none;
+    }
+
+    .all-categories-list {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    .all-categories-list a {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1f1b19;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .all-categories-list a:hover {
+      text-decoration: underline;
+    }
+
+    /* Detailed Article View (Matches 2.png) */
     #detail-view {
       display: none;
       width: 100%;
-      margin: 0;
-      text-align: left;
+      padding-top: 10px;
+    }
+
+    .detail-top-bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      margin-bottom: 30px;
     }
 
     .detail-category {
-      font-size: 14px;
+      font-size: 20px;
       font-weight: 400;
-      text-transform: uppercase;
-      margin-bottom: 15px;
       text-align: left;
+      cursor: pointer;
     }
 
     .article-header-box {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto 30px auto;
       text-align: center;
+      max-width: 700px;
     }
 
     .detail-title {
       font-family: 'Danfo', serif;
-      font-size: 44px;
+      font-size: 54px;
       font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 10px;
-      text-align: center;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 6px;
       overflow-wrap: break-word;
-      word-break: break-word;
     }
 
     .detail-author {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
+      font-size: 20px;
       font-weight: 400;
-      color: #444444;
-      margin-bottom: 20px;
-      text-align: center;
-      overflow-wrap: break-word;
+      color: #1f1b19;
+    }
+
+    .detail-image-box {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto 40px auto;
     }
 
     .detail-image {
       width: 100%;
-      max-width: 600px;
       height: auto;
-      max-height: 480px;
+      max-height: 400px;
       object-fit: cover;
       border: 1px solid #1f1b19;
       display: block;
-      margin: 0 auto;
     }
 
     .detail-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 400;
       line-height: 1.6;
       text-align: left;
+      max-width: 960px;
+      margin: 0 auto;
       overflow-wrap: break-word;
-      word-break: break-word;
     }
 
+    /* Empty State */
     .empty-state {
       text-align: center;
-      margin-top: 60px;
+      margin: 50px 0;
     }
 
     .empty-title {
-      font-family: 'Danfo', serif;
-      font-size: 48px;
+      font-family: 'Inter', sans-serif;
+      font-size: 42px;
       font-weight: 400;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .empty-smiley {
-      font-family: 'Danfo', serif;
-      font-size: 64px;
+      font-family: 'Inter', sans-serif;
+      font-size: 54px;
       font-weight: 400;
     }
 
-    .corner-text {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 14px;
-      font-weight: 400;
+    /* Bottom Footer Navigation */
+    .bottom-footer {
+      border-top: 1px solid #1f1b19;
+      padding: 22px 20px 28px 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
       background-color: #fffefe;
-      border: 1px solid #1f1b19;
-      padding: 6px 12px;
-      z-index: 100;
+      margin-top: auto;
     }
 
-    /* Mobile Version */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
+    /* Responsive Mobile Layout */
+    @media (max-width: 900px) {
+      .articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-header {
+        padding: 20px 16px 6px 16px;
       }
 
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 2px solid #1f1b19;
+      .brand-main {
+        font-size: 56px;
       }
 
-      .brand-header {
-        min-height: auto;
-        padding: 20px 15px;
-      }
-
-      .brand-title {
-        font-size: 30px;
-      }
-
-      .category-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        overflow-y: visible;
-      }
-
-      .category-link {
-        padding: 12px 10px;
-        font-size: 16px;
-        text-align: center;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .nav-all {
-        grid-column: 1 / -1;
-        order: 1;
-      }
-
-      .nav-cat-1 { order: 2; border-right: 1px solid #1f1b19; }
-      .nav-cat-2 { order: 3; }
-      .nav-cat-3 { order: 4; border-right: 1px solid #1f1b19; }
-      .nav-cat-4 { order: 5; }
-
-      .nav-cat-5 {
-        grid-column: 1 / -1;
-        order: 6;
-      }
-
-      .nav-about {
-        grid-column: 1 / -1;
-        order: 7;
-      }
-
-      .nav-donate {
-        order: 8;
-        border-right: 1px solid #1f1b19;
-        border-bottom: none;
-      }
-
-      .nav-publish {
-        order: 9;
-        border-bottom: none;
-      }
-
-      .right-column {
-        max-height: none;
-        overflow-y: visible;
-      }
-
-      .main-content {
-        order: 1;
-        padding: 28px 16px 120px 16px;
-      }
-
-      .magazine-news {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        min-height: auto;
-        padding: 12px 16px;
-        border-top: 2px solid #1f1b19;
-        border-bottom: none;
-        background-color: #fffefe;
-        align-items: center;
-        text-align: center;
-        z-index: 200;
-      }
-
-      .magazine-news-title {
-        font-size: 22px;
-      }
-
-      .magazine-news-snippet {
+      .brand-sub {
         font-size: 14px;
       }
 
+      .popular-nav {
+        gap: 20px;
+        padding: 14px 12px;
+      }
+
+      .underlined-link {
+        font-size: 17px;
+      }
+
+      .main-content {
+        padding: 24px 16px 40px 16px;
+      }
+
+      .magazine-news-snippet {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-top-bar {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
       .detail-title {
-        font-size: 32px;
-      }
-
-      .detail-body {
-        font-size: 16px;
-      }
-
-      .corner-text {
-        bottom: 85px;
-        right: 10px;
-        font-size: 12px;
-        padding: 4px 8px;
+        font-size: 38px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="brand-header">
-      <a href="index.html" class="brand-title">CHEVY<br>the Magazine</a>
-    </div>
-    
-    <ul class="category-list">
-      <li class="category-item nav-all"><a href="#all" class="category-link" onclick="filterArticles('all'); return false;">All Articles</a></li>
-      <li class="category-item nav-cat-1"><a href="#news" class="category-link" onclick="filterArticles('news'); return false;">News \ Politics</a></li>
-      <li class="category-item nav-cat-2"><a href="#art" class="category-link" onclick="filterArticles('art'); return false;">Art \ Photography</a></li>
-      <li class="category-item nav-cat-3"><a href="#books" class="category-link" onclick="filterArticles('books'); return false;">Books \ Poetry</a></li>
-      <li class="category-item nav-cat-4"><a href="#fashion" class="category-link" onclick="filterArticles('fashion'); return false;">Fashion \ Trends</a></li>
-      <li class="category-item nav-cat-5"><a href="#music" class="category-link" onclick="filterArticles('music'); return false;">Music</a></li>
-      <li class="category-item nav-about"><a href="page3.html" class="category-link">About the magazine</a></li>
-      <li class="category-item nav-publish"><a href="page2.html" class="category-link">Publish Your Article</a></li>
-      <li class="category-item nav-donate"><a href="page4.html" class="category-link">Donate</a></li>
-    </ul>  
-  </aside>
-    
-  <!-- Right Column Wrapper -->
-  <div class="right-column">
+  <!-- Top Header + Popular Bar (Shown on Feed View, Hidden on Article View to match 2.png) -->
+  <div id="top-bars">
+    <header class="top-header">
+      <a href="index.html" class="brand-logo" onclick="filterArticles('all'); return false;">
+        <span class="brand-sub">,THE MAGAZINE</span>
+        <span class="brand-main">CHEVY</span>
+      </a>
+      <div class="popular-label">Popular right now</div>
+    </header>
 
-    <!-- MAGAZINE NEWS BAR -->
-    <div id="magazine-news" class="magazine-news" onclick="openMagazineNews()">
-      <h2 id="magazine-news-title" class="magazine-news-title"></h2>
-      <p id="magazine-news-snippet" class="magazine-news-snippet"></p>
-    </div>
+    <nav class="popular-nav">
+      <a href="#news" class="underlined-link" onclick="filterArticles('news'); return false;">News\Politics</a>
+      <a href="#fashion" class="underlined-link" onclick="filterArticles('fashion'); return false;">Fashion</a>
+      <a href="#popculture" class="underlined-link" onclick="filterArticles('popculture'); return false;">Popculture</a>
+      <a href="#art-poetry" class="underlined-link" onclick="filterArticles('art-poetry'); return false;">Art\Poetry</a>
+    </nav>
+  </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      
-      <!-- Feed View (Cards) -->
-      <div id="feed-view">
-        <div class="articles-grid">
-          <!-- ARTICLES_START -->
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Feed View (1.png) -->
+    <div id="feed-view">
+
+      <!-- Magazine News -->
+      <div id="magazine-news" class="magazine-news" onclick="openMagazineNews()">
+        <h2 id="magazine-news-title" class="magazine-news-title"></h2>
+        <p id="magazine-news-snippet" class="magazine-news-snippet"></p>
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="articles-grid">
+        <!-- ARTICLES_START -->
 
         <div class="article-card" data-category="news-politics" onclick="openArticle('Chevy', 'News%5CPolitics', 'Chevy', 'C%3A%2FUsers%2Flenovo%2FPictures%2FScreenshots%2F%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-09-26%20233021.png', 'ChevyChevyChevyChevyChevy')">
           <div class="card-category">News\Politics</div>
@@ -466,14 +444,8 @@
           <img src="C:/Users/lenovo/Pictures/Screenshots/Снимок экрана 2026-09-26 233021.png" alt="Chevy" class="card-image">
           <p class="card-snippet">ChevyChevyChevyChevyChevy</p>
         </div>
-      
-<!-- ARTICLES_END -->
-        </div>
-      </div>
 
-      <!-- Detailed Article View -->
-      <div id="detail-view">
-        <div id="detail-content"></div>
+        <!-- ARTICLES_END -->
       </div>
 
       <!-- Empty State -->
@@ -482,10 +454,35 @@
         <div class="empty-smiley">:(</div>
       </div>
 
-    </main>
-  </div>
+      <!-- All Article Categories Section -->
+      <section class="all-categories-section">
+        <a href="#all" class="all-categories-heading" onclick="filterArticles('all'); return false;">ALL ARTICLE CATEGORIES</a>
+        <ul class="all-categories-list">
+          <li><a href="#news" onclick="filterArticles('news'); return false;">News\Politics</a></li>
+          <li><a href="#fashion" onclick="filterArticles('fashion'); return false;">Fashion</a></li>
+          <li><a href="#art-photo" onclick="filterArticles('art-photo'); return false;">Art\Photo</a></li>
+          <li><a href="#books-poetry" onclick="filterArticles('books-poetry'); return false;">Books\Poetry</a></li>
+          <li><a href="#popculture" onclick="filterArticles('popculture'); return false;">Popculture</a></li>
+          <li><a href="#biographies" onclick="filterArticles('biographies'); return false;">Biographies</a></li>
+        </ul>
+      </section>
 
-  <div class="corner-text">made with love!!!<br>chevy vol.1</div>
+    </div>
+
+    <!-- Detailed Article View (2.png) -->
+    <div id="detail-view">
+      <div id="detail-content"></div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <footer class="bottom-footer">
+    <a href="page3.html" class="underlined-link">About The Magazine</a>
+    <a href="page2.html" class="underlined-link">Publish Your Article</a>
+    <a href="page5.html" class="underlined-link">Join Our Team</a>
+    <a href="page4.html" class="underlined-link">Donate</a>
+  </footer>
 
   <script>
     const magazineNewsData = {
@@ -505,26 +502,32 @@
       snippetEl.textContent = shortText;
     }
 
-    function openMagazineNews() {
+    function openMagazineNews(pushHistory = true) {
+      document.getElementById('top-bars').style.display = 'none';
       document.getElementById('feed-view').style.display = 'none';
-      document.getElementById('empty-state').style.display = 'none';
 
       const detailContainer = document.getElementById('detail-content');
       detailContainer.innerHTML = `
-        <div class="article-header-box">
-          <h1 class="detail-title">${magazineNewsData.title}</h1>
+        <div class="detail-top-bar">
+          <div class="detail-category" onclick="filterArticles(currentCategory)" title="Return to feed">News</div>
+          <div class="article-header-box">
+            <h1 class="detail-title">${magazineNewsData.title}</h1>
+          </div>
+          <div></div>
         </div>
         <div class="detail-body">${magazineNewsData.text}</div>
       `;
 
       document.getElementById('detail-view').style.display = 'block';
-      const rightCol = document.querySelector('.right-column');
-      if (rightCol) rightCol.scrollTop = 0;
+      if (pushHistory) {
+        history.pushState({ view: 'magazine-news' }, '', '#magazine-news');
+      }
       window.scrollTo(0, 0);
     }
 
-    function filterArticles(targetCategory) {
+    function filterArticles(targetCategory, pushHistory = true) {
       currentCategory = targetCategory.toLowerCase();
+      document.getElementById('top-bars').style.display = 'block';
       document.getElementById('detail-view').style.display = 'none';
       document.getElementById('feed-view').style.display = 'block';
 
@@ -545,11 +548,14 @@
       });
 
       emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+      if (pushHistory) {
+        history.pushState({ view: 'feed', category: currentCategory }, '', `#${currentCategory}`);
+      }
     }
 
     function openArticle(title, category, author, image, body) {
+      document.getElementById('top-bars').style.display = 'none';
       document.getElementById('feed-view').style.display = 'none';
-      document.getElementById('empty-state').style.display = 'none';
       
       const decodedTitle = decodeURIComponent(title);
       const decodedCategory = decodeURIComponent(category);
@@ -559,30 +565,45 @@
 
       const detailContainer = document.getElementById('detail-content');
       detailContainer.innerHTML = `
-        <div class="detail-category">${decodedCategory}</div>
-        
-        <div class="article-header-box">
-          <h1 class="detail-title">${decodedTitle}</h1>
-          ${decodedAuthor ? `<div class="detail-author">${decodedAuthor}</div>` : ''}
-          ${decodedImage ? `<img src="${decodedImage}" class="detail-image" alt="${decodedTitle}">` : ''}
+        <div class="detail-top-bar">
+          <div class="detail-category" onclick="filterArticles(currentCategory)" title="Return to feed">${decodedCategory}</div>
+          <div class="article-header-box">
+            <h1 class="detail-title">${decodedTitle}</h1>
+            ${decodedAuthor ? `<div class="detail-author">${decodedAuthor}</div>` : ''}
+          </div>
+          <div></div>
         </div>
+
+        ${decodedImage ? `
+          <div class="detail-image-box">
+            <img src="${decodedImage}" class="detail-image" alt="${decodedTitle}">
+          </div>
+        ` : ''}
 
         <div class="detail-body">${decodedBody}</div>
       `;
       
       document.getElementById('detail-view').style.display = 'block';
-      const rightCol = document.querySelector('.right-column');
-      if (rightCol) rightCol.scrollTop = 0;
+      history.pushState({ view: 'article' }, '', '#article');
       window.scrollTo(0, 0);
     }
 
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      if (hash === 'magazine-news') {
+        openMagazineNews(false);
+      } else {
+        filterArticles(currentCategory, false);
+      }
+    });
+
     window.addEventListener('DOMContentLoaded', () => {
       initMagazineNews();
-      const hash = window.location.hash.replace('#', '');
+      const hash = window.location.hash.replace('#', '').toLowerCase();
       if (hash === 'magazine-news') {
-        openMagazineNews();
-      } else if (['all', 'news', 'art', 'books', 'fashion', 'music'].includes(hash)) {
-        filterArticles(hash);
+        openMagazineNews(false);
+      } else if (['all', 'news', 'fashion', 'popculture', 'art-poetry', 'art-photo', 'books-poetry', 'biographies', 'art', 'books'].includes(hash)) {
+        filterArticles(hash, false);
       }
     });
   </script>

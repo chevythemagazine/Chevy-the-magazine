@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CHEVY the Magazine — About The Magazine</title>
+  <title>Chevy, the magazine — About The Magazine</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,117 +15,90 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      display: flex;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       background-color: #fffefe;
       color: #1f1b19;
       overflow-x: hidden;
     }
 
-    .sidebar {
-      width: 280px;
-      border-right: 2px solid #1f1b19;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      background: #fffefe;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-    }
-
-    .brand-header {
-      min-height: 118px;
-      padding: 20px;
-      border-bottom: 1px solid #1f1b19;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .top-header {
+      padding: 24px 40px 8px 40px;
       text-align: center;
     }
 
-    .brand-title {
-      font-family: 'Danfo', serif;
-      font-size: 32px;
-      line-height: 1.2;
-      font-weight: 400;
+    .brand-logo {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-end;
       text-decoration: none;
       color: #1f1b19;
-      display: block;
     }
 
-    .category-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-
-    .category-item {
-      border-bottom: 1px solid #1f1b19;
-    }
-
-    .category-link {
-      display: block;
-      padding: 20px;
+    .brand-sub {
+      font-family: 'Danfo', serif;
       font-size: 18px;
       font-weight: 400;
+      line-height: 1;
+      margin-bottom: -6px;
+    }
+
+    .brand-main {
+      font-family: 'Danfo', serif;
+      font-size: 82px;
+      font-weight: 400;
+      line-height: 0.9;
+    }
+
+    .popular-label {
+      font-size: 14px;
+      font-weight: 400;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .popular-nav {
+      border-top: 1px solid #1f1b19;
+      border-bottom: 1px solid #1f1b19;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .underlined-link {
+      font-size: 22px;
+      font-weight: 400;
       color: #1f1b19;
       text-decoration: none;
-      transition: background-color 0.2s, color 0.2s;
+      padding-bottom: 6px;
+      position: relative;
     }
 
-    .category-link:hover {
+    .underlined-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
       background-color: #1f1b19;
-      color: #fffefe;
+      transition: width 0.2s, left 0.2s;
     }
 
-    .right-column {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      max-height: 100vh;
-      overflow-y: auto;
-    }
-
-    /* Magazine News Bar - Static */
-    .magazine-news {
-      min-height: 118px;
-      padding: 20px 40px;
-      border-bottom: 1px solid #1f1b19;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background-color: #fffefe;
-      color: #1f1b19;
-      flex-shrink: 0;
-      cursor: pointer;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .magazine-news-title {
-      font-family: 'Danfo', serif;
-      font-size: 28px;
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 4px;
-      color: #1f1b19;
-    }
-
-    .magazine-news-snippet {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: #222222;
-      line-height: 1.4;
+    .underlined-link:hover::after {
+      left: 0;
+      width: 100%;
     }
 
     .main-content {
       flex-grow: 1;
-      padding: 60px 40px;
       width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 40px;
     }
 
     .content-heading {
@@ -132,149 +106,77 @@
       font-size: 48px;
       font-weight: 400;
       text-align: center;
-      margin-bottom: 40px;
-      line-height: 1.15;
+      margin-bottom: 36px;
+      text-transform: uppercase;
     }
 
     .content-body {
-      font-family: 'Inter', sans-serif;
       font-size: 20px;
       font-weight: 400;
       line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
       overflow-wrap: break-word;
     }
 
-    .corner-text {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 14px;
-      font-weight: 400;
-      background-color: #fffefe;
-      border: 1px solid #1f1b19;
-      padding: 6px 12px;
-      z-index: 100;
+    .bottom-footer {
+      border-top: 1px solid #1f1b19;
+      padding: 22px 20px 28px 20px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: auto;
     }
 
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 2px solid #1f1b19;
-      }
-
-      .brand-header { min-height: auto; padding: 20px 15px; }
-      .brand-title { font-size: 30px; }
-
-      .category-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        overflow-y: visible;
-      }
-
-      .category-link {
-        padding: 12px 10px;
-        font-size: 16px;
-        text-align: center;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .nav-all { grid-column: 1 / -1; order: 1; }
-      .nav-cat-1 { order: 2; border-right: 1px solid #1f1b19; }
-      .nav-cat-2 { order: 3; }
-      .nav-cat-3 { order: 4; border-right: 1px solid #1f1b19; }
-      .nav-cat-4 { order: 5; }
-      .nav-cat-5 { grid-column: 1 / -1; order: 6; }
-      .nav-about { grid-column: 1 / -1; order: 7; }
-      .nav-donate { order: 8; border-right: 1px solid #1f1b19; border-bottom: none; }
-      .nav-publish { order: 9; border-bottom: none; }
-
-      .right-column {
-        max-height: none;
-        overflow-y: visible;
-      }
-
-      .main-content {
-        order: 1;
-        padding: 30px 16px 120px 16px;
-      }
-
-      .magazine-news {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        min-height: auto;
-        padding: 12px 16px;
-        border-top: 2px solid #1f1b19;
-        border-bottom: none;
-        background-color: #fffefe;
-        align-items: center;
-        text-align: center;
-        z-index: 200;
-      }
-
-      .magazine-news-title { font-size: 22px; }
-      .magazine-news-snippet { font-size: 14px; }
-      .content-heading { font-size: 34px; margin-bottom: 25px; }
+    @media (max-width: 600px) {
+      .top-header { padding: 20px 16px 6px 16px; }
+      .brand-main { font-size: 56px; }
+      .brand-sub { font-size: 14px; }
+      .popular-nav { gap: 20px; padding: 14px 12px; }
+      .underlined-link { font-size: 17px; }
+      .main-content { padding: 30px 16px; }
+      .content-heading { font-size: 36px; }
       .content-body { font-size: 17px; }
-      .corner-text { bottom: 85px; right: 10px; font-size: 12px; padding: 4px 8px; }
     }
   </style>
 </head>
 <body>
 
-  <aside class="sidebar">
-    <div class="brand-header">
-      <a href="index.html" class="brand-title">CHEVY<br>the Magazine</a>
-    </div>
+  <header class="top-header">
+    <a href="index.html" class="brand-logo">
+      <span class="brand-sub">,THE MAGAZINE</span>
+      <span class="brand-main">CHEVY</span>
+    </a>
+    <div class="popular-label">Popular right now</div>
+  </header>
+
+  <nav class="popular-nav">
+    <a href="index.html#news" class="underlined-link">News\Politics</a>
+    <a href="index.html#fashion" class="underlined-link">Fashion</a>
+    <a href="index.html#popculture" class="underlined-link">Popculture</a>
+    <a href="index.html#art" class="underlined-link">Art\Poetry</a>
+  </nav>
+
+  <main class="main-content">
+    <h1 class="content-heading">About The Magazine</h1>
     
-    <ul class="category-list">
-      <li class="category-item nav-all"><a href="index.html#all" class="category-link">All Articles</a></li>
-      <li class="category-item nav-cat-1"><a href="index.html#news" class="category-link">News \ Politics</a></li>
-      <li class="category-item nav-cat-2"><a href="index.html#art" class="category-link">Art \ Photography</a></li>
-      <li class="category-item nav-cat-3"><a href="index.html#books" class="category-link">Books \ Poetry</a></li>
-      <li class="category-item nav-cat-4"><a href="index.html#fashion" class="category-link">Fashion \ Trends</a></li>
-      <li class="category-item nav-cat-5"><a href="index.html#music" class="category-link">Music</a></li>
-      <li class="category-item nav-about"><a href="page3.html" class="category-link">About the magazine</a></li>
-      <li class="category-item nav-publish"><a href="page2.html" class="category-link">Publish Your Article</a></li>
-      <li class="category-item nav-donate"><a href="page4.html" class="category-link">Donate</a></li>
-    </ul>
-  </aside>
-
-  <div class="right-column">
-    
-    <!-- MAGAZINE NEWS BAR -->
-    <div class="magazine-news" onclick="window.location.href='index.html#magazine-news'">
-      <h2 class="magazine-news-title">Chevy has launched!!!</h2>
-      <p class="magazine-news-snippet">After a few months, our 'Chevy' is finally launche...</p>
+    <div class="content-body">
+      <p>
+        'Chevy, the magazine' is a fully youth/teen-led online magazine specializing in art, pop culture/fashion, news, and STEM. Our main mission is to make the pitching and publication process for young writers, artists, and scientists as simple and enjoyable as possible (and we would be VERY thankful if you decide to pitch to us!).
+      </p>
+      <br>
+      <p>
+        If you have questions, email us at <a href="mailto:chevythemagazine@gmail.com" style="color: #1f1b19; text-decoration: underline;">chevythemagazine@gmail.com</a>.
+      </p>
     </div>
+  </main>
 
-    <main class="main-content">
-      <h1 class="content-heading">About The Magazine</h1>
-      
-      <div class="content-body">
-        <p>
-          'Chevy, the magazine' is a fully youth/teen-led online magazine specializing in art, pop culture/fashion, news, and STEM. Our main mission is to make the pitching and publication process for young writers, artists, and scientists as simple and enjoyable as possible (and we would be VERY thankful if you decide to pitch to us!).
-        </p>
-        <br>
-        <p>
-          If you have questions, email us at <a href="mailto:chevythemagazine@gmail.com" style="color: #1f1b19; font-weight: 400; text-decoration: underline;">chevythemagazine@gmail.com</a>.
-        </p>
-      </div>
-    </main>
-  </div>
-
-  <div class="corner-text">made with love!!!<br>chevy vol.1</div>
+  <footer class="bottom-footer">
+    <a href="page3.html" class="underlined-link">About The Magazine</a>
+    <a href="page2.html" class="underlined-link">Publish Your Article</a>
+    <a href="page5.html" class="underlined-link">Join Our Team</a>
+    <a href="page4.html" class="underlined-link">Donate</a>
+  </footer>
 
 </body>
 </html>
