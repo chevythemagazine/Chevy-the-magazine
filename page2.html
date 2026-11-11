@@ -5,168 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chevy, the magazine — Publish Your Article</title>
   <link rel="icon" type="image/png" href="favicon.png">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:wght@500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: #fffefe;
-      color: #1f1b19;
-      overflow-x: hidden;
-    }
-
-    .top-header {
-      padding: 24px 40px 8px 40px;
-      text-align: center;
-    }
-
-    .brand-logo {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-end;
-      text-decoration: none;
-      color: #1f1b19;
-    }
-
-    .brand-sub {
-      font-family: 'Danfo', serif;
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 1;
-      margin-bottom: -6px;
-    }
-
-    .brand-main {
-      font-family: 'Danfo', serif;
-      font-size: 82px;
-      font-weight: 400;
-      line-height: 0.9;
-    }
-
-    .popular-label {
-      font-size: 14px;
-      font-weight: 400;
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    .popular-nav {
-      border-top: 1px solid #1f1b19;
-      border-bottom: 1px solid #1f1b19;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      flex-wrap: wrap;
-    }
-
-    .underlined-link {
-      font-size: 22px;
-      font-weight: 400;
-      color: #1f1b19;
-      text-decoration: none;
-      padding-bottom: 6px;
-      position: relative;
-    }
-
-    .underlined-link::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 15%;
-      width: 70%;
-      height: 1px;
-      background-color: #1f1b19;
-      transition: width 0.2s, left 0.2s;
-    }
-
-    .underlined-link:hover::after {
-      left: 0;
-      width: 100%;
-    }
-
-    .main-content {
-      flex-grow: 1;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 50px 40px;
-    }
-
-    .content-heading {
-      font-family: 'Danfo', serif;
-      font-size: 48px;
-      font-weight: 400;
-      text-align: center;
-      margin-bottom: 36px;
-      text-transform: uppercase;
-    }
-
-    .rules-title {
-      font-family: 'Danfo', serif;
-      font-size: 32px;
-      font-weight: 400;
-      margin: 30px 0 15px 0;
-    }
-
-    .content-body {
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.6;
-      overflow-wrap: break-word;
-    }
-
-    .bottom-footer {
-      border-top: 1px solid #1f1b19;
-      padding: 22px 20px 28px 20px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: auto;
-    }
-
+    body { font-family: 'Inter', sans-serif; font-weight: 500; min-height: 100vh; display: flex; flex-direction: column; background-color: #fffefe; color: #1f1b19; overflow-x: hidden; }
+    .top-header { padding: 24px 40px 18px 40px; text-align: center; }
+    .brand-logo { display: inline-flex; flex-direction: column; align-items: flex-end; text-decoration: none; color: #1f1b19; }
+    .brand-sub { font-family: 'Danfo', serif; font-size: 18px; font-weight: 400; line-height: 1; margin-bottom: -6px; }
+    .brand-main { font-family: 'Danfo', serif; font-size: 82px; font-weight: 400; line-height: 0.9; }
+    .popular-nav { border-top: 1px solid #1f1b19; border-bottom: 1px solid #1f1b19; padding: 18px 20px; display: flex; justify-content: center; gap: 42px; flex-wrap: wrap; }
+    .underlined-link { font-size: 20px; font-weight: 500; color: #1f1b19; text-decoration: none; padding-bottom: 6px; position: relative; }
+    .underlined-link::after { content: ""; position: absolute; bottom: 0; left: 15%; width: 70%; height: 1px; background-color: #1f1b19; transition: width 0.2s, left 0.2s; }
+    .underlined-link:hover::after { left: 0; width: 100%; }
+    .main-content { flex-grow: 1; width: 100%; max-width: 900px; margin: 0 auto; padding: 36px 40px 50px 40px; }
+    .magazine-news { text-align: center; margin-bottom: 40px; cursor: pointer; }
+    .magazine-news-title { font-family: 'Danfo', serif; font-size: 32px; font-weight: 400; text-transform: uppercase; margin-bottom: 8px; color: #1f1b19; }
+    .magazine-news-snippet { display: inline-block; font-size: 18px; font-weight: 500; color: #1f1b19; padding: 0 20px 6px 20px; border-bottom: 1px solid #1f1b19; min-width: 340px; text-align: center; }
+    .content-heading { font-family: 'Danfo', serif; font-size: 48px; font-weight: 400; text-align: center; margin-bottom: 36px; text-transform: uppercase; }
+    .rules-title { font-family: 'Danfo', serif; font-size: 32px; font-weight: 400; margin: 30px 0 15px 0; }
+    .content-body { font-size: 20px; font-weight: 500; line-height: 1.6; overflow-wrap: break-word; }
+    .bottom-footer { border-top: 1px solid #1f1b19; padding: 22px 20px 28px 20px; display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; margin-top: auto; }
     @media (max-width: 600px) {
-      .top-header { padding: 20px 16px 6px 16px; }
+      .top-header { padding: 20px 16px 14px 16px; }
       .brand-main { font-size: 56px; }
       .brand-sub { font-size: 14px; }
       .popular-nav { gap: 20px; padding: 14px 12px; }
       .underlined-link { font-size: 17px; }
-      .main-content { padding: 30px 16px; }
+      .main-content { padding: 24px 16px; }
+      .magazine-news-snippet { min-width: 0; width: 100%; }
       .content-heading { font-size: 36px; }
       .content-body { font-size: 17px; }
     }
   </style>
 </head>
 <body>
-
   <header class="top-header">
     <a href="index.html" class="brand-logo">
       <span class="brand-sub">,THE MAGAZINE</span>
       <span class="brand-main">CHEVY</span>
     </a>
-    <div class="popular-label">Popular right now</div>
   </header>
 
   <nav class="popular-nav">
-    <a href="index.html#news" class="underlined-link">News\Politics</a>
     <a href="index.html#fashion" class="underlined-link">Fashion</a>
-    <a href="index.html#popculture" class="underlined-link">Popculture</a>
-    <a href="index.html#art" class="underlined-link">Art\Poetry</a>
+    <a href="index.html#entertaiment" class="underlined-link">Entertaiment</a>
+    <a href="index.html#art" class="underlined-link">Art\Photo</a>
+    <a href="index.html#books" class="underlined-link">Books\Poetry</a>
+    <a href="index.html#news" class="underlined-link">News\Politics</a>
+    <a href="index.html#culture" class="underlined-link">Culture</a>
   </nav>
 
   <main class="main-content">
+    <div class="magazine-news" onclick="window.location.href='index.html#magazine-news'">
+      <h2 class="magazine-news-title">Chevy has launched!!!</h2>
+      <p class="magazine-news-snippet">After a few months, our 'Chevy' is finally launche...</p>
+    </div>
+
     <h1 class="content-heading">Publish Your Article</h1>
-    
     <div class="content-body">
       <p>
         To publish your article: 
@@ -174,16 +71,13 @@
         Or email us: 
         <a href="mailto:chevythemagazine@gmail.com" style="color: #1f1b19; text-decoration: underline;">chevythemagazine@gmail.com</a>
       </p>
-
       <h2 class="rules-title">Rules:</h2>
-      
       <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.8;">
         <li>You can publish any amount of articles\images</li>
         <li>We accept already published articles\images on other resources</li>
         <li>Your articles can be edited; by submitting them you give us the right to do so</li>
         <li>You can submit material from all around the world</li>
       </ul>
-
       <p style="margin-top: 25px;">Thanks for reaching out!</p>
     </div>
   </main>
@@ -194,6 +88,5 @@
     <a href="page5.html" class="underlined-link">Join Our Team</a>
     <a href="page4.html" class="underlined-link">Donate</a>
   </footer>
-
 </body>
 </html>
