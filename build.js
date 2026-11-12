@@ -15,6 +15,7 @@ fs.readdir(articlesDir, (err, files) => {
   }
 
   let feedHTML = '';
+  let imageCardCount = 0;
 
   files.forEach(file => {
     if (path.extname(file).toLowerCase() === '.txt') {
@@ -43,16 +44,14 @@ fs.readdir(articlesDir, (err, files) => {
             .replace(/^["']|["']$/g, '')
             .replace(/\\/g, '/');
         } else {
-          if (bodyLines.length === 0 && trimmed === '') {
-            return;
-          }
+          if (bodyLines.length === 0 && trimmed === '') return;
           bodyLines.push(line);
         }
       });
 
       const bodyText = bodyLines.join('<br>');
       const rawTextOnly = bodyLines.join(' ').replace(/<br\s*\/?>/gi, ' ').replace(/\s+/g, ' ').trim();
-      const snippet = rawTextOnly.substring(0, 50) + (rawTextOnly.length > 50 ? '...' : '');
+      const snippet = rawTextOnly.substring(0, 55) + (rawTextOnly.length > 55 ? '....................' : '');
       const cleanCategory = category.toLowerCase().replace(/[/\\\s]+/g, '-').replace(/"/g, '');
 
       const safeBody = encodeForInlineJS(bodyText);
@@ -64,15 +63,32 @@ fs.readdir(articlesDir, (err, files) => {
       const cleanAlt = title.replace(/"/g, "'");
       const cleanImgSrc = imageUrl.replace(/"/g, '');
 
-      feedHTML += `
-        <div class="article-card" data-category="${cleanCategory}" onclick="openArticle('${safeTitle}', '${safeCategory}', '${safeAuthor}', '${safeImage}', '${safeBody}')">
-          <div class="card-category">${category}</div>
-          <h2 class="card-title">${title}</h2>
-          ${author ? `<div class="card-author">${author}</div>` : ''}
-          ${imageUrl ? `<img src="${cleanImgSrc}" alt="${cleanAlt}" class="card-image">` : ''}
-          <p class="card-snippet">${snippet}</p>
-        </div>
-      `;
+      if (imageUrl) {
+        const imgFirst = (imageCardCount % 2 === 0);
+        imageCardCount++;
+
+        feedHTML += `
+        <article class="article-card card-2tile" data-category="${cleanCategory}" onclick="openArticle('${safeTitle}', '${safeCategory}', '${safeAuthor}', '${safeImage}', '${safeBody}')">
+          ${imgFirst ? `<img src="${cleanImgSrc}" alt="${cleanAlt}" class="card-image">` : ''}
+          <div class="card-text">
+            <div class="card-category">${category}</div>
+            <h2 class="card-title">${title}</h2>
+            <p class="card-snippet">${snippet}</p>
+          </div>
+          ${!imgFirst ? `<img src="${cleanImgSrc}" alt="${cleanAlt}" class="card-image">` : ''}
+        </article>
+        `;
+      } else {
+        feedHTML += `
+        <article class="article-card card-1tile" data-category="${cleanCategory}" onclick="openArticle('${safeTitle}', '${safeCategory}', '${safeAuthor}', '', '${safeBody}')">
+          <div class="card-text">
+            <div class="card-category">${category}</div>
+            <h2 class="card-title">${title}</h2>
+            <p class="card-snippet">${snippet}</p>
+          </div>
+        </article>
+        `;
+      }
     }
   });
 
