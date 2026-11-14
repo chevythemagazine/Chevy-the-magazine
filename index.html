@@ -7,36 +7,12 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" 
-<link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <style>
-/* 1. Top category bar links */
-.cat-link {
-  font-style: italic;
-  text-transform: uppercase;
-}
-
-/* 2. Category label on article grid cards */
-.card-category {
-  font-style: italic;
-  text-transform: uppercase;
-}
-
-/* 3. Category label inside an open article */
-.detail-category {
-  font-style: italic;
-  text-transform: uppercase;
-}
-
-/* 4. "MORE OF CHEVY" title in the footer (Add this in page2, page3, page4, page5 too) */
-.footer-links-title {
-  font-style: italic;
-  text-transform: uppercase;
-}
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
+      font-weight: 400;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -49,11 +25,11 @@ rel="stylesheet">
     .top-header {
       padding: 26px 20px 20px 20px;
       text-align: center;
-      border-bottom: 1px solid #1f1b19;
+      border-bottom: 1.5px solid #1f1b19;
     }
     .header-title {
       font-family: 'Danfo', serif;
-      font-size: 62px;
+      font-size: 64px;
       font-weight: 400;
       line-height: 1;
       color: #1f1b19;
@@ -62,103 +38,153 @@ rel="stylesheet">
       cursor: pointer;
     }
 
-    /* Categories Bar with Vertical Dividers */
+    /* Italic Categories Bar with Floating Vertical Dividers */
     .categories-nav {
-      border-bottom: 1px solid #1f1b19;
-      padding: 12px 20px;
+      border-bottom: 1.5px solid #1f1b19;
+      padding: 14px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
     }
     .cat-link {
-      font-size: 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 21px;
       font-style: italic;
       font-weight: 400;
       text-transform: uppercase;
       color: #1f1b19;
       text-decoration: none;
-      padding: 4px 22px;
-      border-right: 1px solid #1f1b19;
+      padding: 2px 24px;
+      border-right: 1.5px solid #1f1b19;
       cursor: pointer;
     }
     .cat-link:last-child { border-right: none; }
     .cat-link:hover { text-decoration: underline; }
 
-    /* Main Content */
+    /* Main Content Container */
     .main-content {
       flex-grow: 1;
       width: 100%;
-      max-width: 1160px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 24px 28px 40px 28px;
+      padding: 22px 30px;
     }
 
-      }
-
-    /* Newspaper 3-Column Grid (1-Tile vs 2-Tile) */
+    /* 3-Column Newspaper Grid (Matches 2nd Image Exactly) */
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 195px;
+      grid-template-columns: repeat(3, 320px);
+      justify-content: start;
+      grid-auto-rows: 210px;
       grid-auto-flow: dense;
     }
+
+    /* Works for both old build.js (.article-card) and new build.js (.card-1tile / .card-2tile) */
     .article-card {
-      padding: 18px 22px;
-      border-right: 1px solid #1f1b19;
-      border-bottom: 1px solid #1f1b19;
+      padding: 14px 22px;
+      border-right: 1.5px solid #1f1b19;
+      border-bottom: 1.5px solid #1f1b19;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       cursor: pointer;
       background-color: #fffefe;
       overflow: hidden;
+      grid-row: span 2; /* Default 2-tile if image is present */
     }
+
+    /* Left vertical line on the first column (Matches 2nd Image) */
+    .articles-grid > .article-card:nth-child(3n+1) {
+      border-left: 1.5px solid #1f1b19;
+    }
+
+    /* Remove bottom border when there is only 1 row (Matches 2nd Image) */
+    .articles-grid > .article-card:last-child,
+    .articles-grid > .article-card:nth-last-child(-n+3) {
+      border-bottom: none;
+    }
+
     .card-1tile {
-      grid-row: span 1;
+      grid-row: span 1 !important;
       justify-content: center;
+      border-bottom: 1.5px solid #1f1b19 !important;
     }
     .card-2tile {
-      grid-row: span 2;
+      grid-row: span 2 !important;
+    }
+
+    /* Forces image to the top even if old build.js was used */
+   .card-image {
+      order: 1;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 10px;
     }
     .card-category {
-      font-size: 17px;
+      order: 2;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
       font-style: italic;
+      font-weight: 400;
       text-transform: uppercase;
+      margin-bottom: 2px;
+      text-align: left;
+    }
+    .card-author {
+      order: 3;
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      color: #1f1b19;
       margin-bottom: 4px;
+      text-align: left;
     }
     .card-title {
+      order: 4;
       font-family: 'Danfo', serif;
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 400;
-      line-height: 1.05;
+      line-height: 1.02;
       text-transform: uppercase;
       margin-bottom: 6px;
+      text-align: left;
       overflow-wrap: break-word;
     }
     .card-snippet {
-      font-size: 17px;
+      order: 5;
+      font-size: 18px;
+      font-style: normal;
       line-height: 1.35;
       color: #1f1b19;
+      text-align: left;
+      overflow-wrap: break-word;
+    }/
+    }
+    .card-snippet {
+      font-size: 18px;
+      font-style: normal;
+      line-height: 1.35;
+      color: #1f1b19;
+      text-align: left;
       overflow-wrap: break-word;
     }
-    .card-image {
-      width: 100%;
-      height: 195px;
-      object-fit: cover;
-      display: block;
-      margin: 6px 0;
-    }
 
-    /* Open Article View (Matches 2_3.png) */
+    /* Open Article View */
     #detail-view {
       display: none;
       width: 100%;
-      padding: 10px 0 30px 0;
+      padding: 12px 0 30px 0;
     }
     .detail-category {
+      font-family: 'Inter', sans-serif;
       font-size: 24px;
       font-style: italic;
+      font-weight: 400;
       text-transform: uppercase;
       margin-bottom: 6px;
       text-align: left;
@@ -174,6 +200,7 @@ rel="stylesheet">
     }
     .detail-author {
       font-size: 18px;
+      font-style: italic;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -187,6 +214,7 @@ rel="stylesheet">
     }
     .detail-body {
       font-size: 22px;
+      font-style: normal;
       line-height: 1.6;
       text-align: left;
       max-width: 960px;
@@ -211,15 +239,15 @@ rel="stylesheet">
       font-weight: 400;
     }
 
-    /* Footer (Matches 1.jpg, 2_3.png, 3.png) */
+    /* Footer */
     .site-footer {
-      border-top: 1px solid #1f1b19;
+      border-top: 1.5px solid #1f1b19;
       padding: 28px 40px 36px 40px;
       margin-top: auto;
       background-color: #fffefe;
     }
     .footer-inner {
-      max-width: 1100px;
+      max-width: 1020px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -246,8 +274,10 @@ rel="stylesheet">
       line-height: 0.9;
     }
     .footer-links-title {
+      font-family: 'Inter', sans-serif;
       font-size: 24px;
       font-style: italic;
+      font-weight: 400;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
@@ -259,22 +289,21 @@ rel="stylesheet">
     }
     .footer-links-grid a {
       font-size: 19px;
+      font-style: normal;
       text-transform: uppercase;
       color: #1f1b19;
       text-decoration: none;
     }
     .footer-links-grid a:hover { text-decoration: underline; }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1040px) {
       .articles-grid { grid-template-columns: repeat(2, 1fr); }
-      .header-title { font-size: 46px; }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .header-title { font-size: 34px; }
       .cat-link { font-size: 15px; padding: 4px 10px; }
       .articles-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-      .article-card { border-right: none; }
-      .card-2tile { grid-row: span 1; }
+      .article-card { grid-row: span 1 !important; }
       .footer-inner { gap: 36px; }
       .footer-links-grid { grid-template-columns: 1fr; row-gap: 8px; }
       .detail-title { font-size: 38px; }
@@ -298,11 +327,21 @@ rel="stylesheet">
 
   <main class="main-content">
     <div id="feed-view">
-         </div>
       <div id="articles-grid" class="articles-grid">
         <!-- ARTICLES_START -->
 
-        <!-- ARTICLES_END -->
+        <article class="article-card card-2tile" data-category="art-photo" onclick="openArticle('Borsch', 'Art%5CPhoto', 'P%27udell', 'C%3A%2FUsers%2Flenovo%2FDesktop%2Fwifi%2Fimages%2FIMG_20261014_095309_554%20-%20%D0%90%D1%80%D1%96%D0%BD%D0%B0%20%D0%A0%D0%B8%D1%87%D0%B8%D0%BA.jpg', 'To%20support%20the%20author%2C%20please%20transfer%20the%20channel%20to%20Telegram%3Ahttps%3A%2F%2Ft.me%2Fpudelli.%3Cbr%3E%20I%27m%20a%20teenager%20from%20Ukraine.%20I%27m%20an%20aspiring%20creator%20who%20wants%20to%20share%20my%20ideas%20with%20the%20masses.%20This%20artwork%20is%20an%20interpretation%20of%20the%20work%20of%20Ukrainian%20director%20and%20streamer%20Kirill%20Ami.%20It%27s%20his%20first%20attempt%20at%20reaching%20the%20masses.%20%3Cbr%3EI%27ll%20be%20hosting%20streams%20on%20topics%20including%20psychology%2C%20art%2C%20neuroscience%2C%20and%20philosophy.%20%3Cbr%3EMy%20signature%20is%20%22diff%2C%22%20short%20for%20%22different.%22%20For%20me%2C%20this%20carries%20a%20symbolic%20meaning%20about%20how%20different%20we%20all%20are.')">
+          <img src="C:/Users/lenovo/Desktop/wifi/images/IMG_20261014_095309_554 - Аріна Ричик.jpg" alt="Borsch" class="card-image">
+       <div class="card-text">
+            <div class="card-category">Art\Photo</div>
+            <div class="card-author">P'udell</div>
+            <h2 class="card-title">Borsch</h2>
+            <p class="card-snippet">To support the author, please transfer the channel to T....................</p>
+          </div>
+          
+        </article>
+        
+<!-- ARTICLES_END -->
       </div>
 
       <div id="empty-state" class="empty-state" style="display: block;">
@@ -335,25 +374,7 @@ rel="stylesheet">
   </footer>
 
   <script>
-    const magazineNewsData = {
-      title: "Chevy has launched!!!",
-      text: "After a few months, our 'Chevy' is finally launched! I'm so happy to announce the start of our magazine. To read more and/or ask questions, read the 'About the Magazine' page! We are open to pitches."
-    };
-
     let currentCategory = 'all';
-
-    function openMagazineNews(pushHistory = true) {
-      document.getElementById('top-categories-nav').style.display = 'none';
-      document.getElementById('feed-view').style.display = 'none';
-      document.getElementById('detail-content').innerHTML = `
-        <div class="detail-category">NEWS</div>
-        <h1 class="detail-title">${magazineNewsData.title}</h1>
-        <div class="detail-body">${magazineNewsData.text}</div>
-      `;
-      document.getElementById('detail-view').style.display = 'block';
-      if (pushHistory) history.pushState({ view: 'magazine-news' }, '', '#magazine-news');
-      window.scrollTo(0, 0);
-    }
 
     function filterArticles(targetCategory, pushHistory = true) {
       currentCategory = targetCategory.toLowerCase();
@@ -365,6 +386,13 @@ rel="stylesheet">
       let visibleCount = 0;
 
       cards.forEach(card => {
+        /* Automatically set 1-tile if no image is inside the card */
+        if (!card.querySelector('img')) {
+          card.classList.add('card-1tile');
+        } else {
+          card.classList.add('card-2tile');
+        }
+
         const cardCat = (card.getAttribute('data-category') || '').toLowerCase();
         const isEnt = ['entertaiment', 'entertainment', 'entartaiment'].includes(currentCategory) &&
                       (cardCat.includes('entertaiment') || cardCat.includes('entertainment') || cardCat.includes('entartaiment'));
@@ -405,15 +433,12 @@ rel="stylesheet">
     }
 
     window.addEventListener('popstate', () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'magazine-news') openMagazineNews(false);
-      else filterArticles(currentCategory, false);
+      filterArticles(currentCategory, false);
     });
 
     window.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'magazine-news') openMagazineNews(false);
-      else if (['all', 'fashion', 'entertaiment', 'entertainment', 'entartaiment', 'art', 'books', 'book', 'news', 'culture'].includes(hash)) {
+      if (['all', 'fashion', 'entertaiment', 'entertainment', 'entartaiment', 'art', 'books', 'book', 'news', 'culture'].includes(hash)) {
         filterArticles(hash, false);
       } else {
         filterArticles('all', false);

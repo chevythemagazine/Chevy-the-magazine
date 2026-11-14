@@ -70,8 +70,9 @@ fs.readdir(articlesDir, (err, files) => {
         feedHTML += `
         <article class="article-card card-2tile" data-category="${cleanCategory}" onclick="openArticle('${safeTitle}', '${safeCategory}', '${safeAuthor}', '${safeImage}', '${safeBody}')">
           ${imgFirst ? `<img src="${cleanImgSrc}" alt="${cleanAlt}" class="card-image">` : ''}
-          <div class="card-text">
+       <div class="card-text">
             <div class="card-category">${category}</div>
+            ${author ? `<div class="card-author">${author}</div>` : ''}
             <h2 class="card-title">${title}</h2>
             <p class="card-snippet">${snippet}</p>
           </div>
