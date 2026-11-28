@@ -7,10 +7,11 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" 
-<link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <style>
+    @font-face { font-family: 'Kabisat Demo-ItalicTall'; src: url('Kabisat Demo-ItalicTall.ttf'); }
+    @font-face { font-family: 'Lyzero'; src: url('Lyzero DEMO.ttf'); }
+    @font-face { font-family: 'Danfo'; src: url('Lyzero DEMO.ttf'); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background-color: #fffefe; color: #1f1b19; overflow-x: hidden; }
     .top-header { padding: 26px 20px 20px 20px; text-align: center; border-bottom: 1px solid #1f1b19; }
@@ -26,8 +27,9 @@ rel="stylesheet">
     .footer-logo-main { font-family: 'Danfo', serif; font-size: 68px; line-height: 0.9; }
     .footer-links-title { font-size: 24px; font-style: italic; text-transform: uppercase; margin-bottom: 12px; }
     .footer-links-grid { display: grid; grid-template-columns: auto auto; column-gap: 80px; row-gap: 10px; }
-    .footer-links-grid a { font-size: 19px; text-transform: uppercase; color: #1f1b19; text-decoration: none; }
-    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-links-col { display: grid; grid-template-columns: 1fr; row-gap: 10px; }
+    .footer-links-grid a, .footer-links-col a { font-size: 19px; text-transform: uppercase; color: #1f1b19; text-decoration: none; }
+    .footer-links-grid a:hover, .footer-links-col a:hover { text-decoration: underline; }
     @media (max-width: 600px) {
       .header-title { font-size: 34px; }
       .content-heading { font-size: 36px; }
@@ -74,6 +76,13 @@ rel="stylesheet">
           <a href="page5.html">JOIN OUR TEAM</a>
           <a href="page2.html">PUBLISH YOUR ARTICLE</a>
           <a href="page4.html">DONATE</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-links-title">ISSUES</div>
+        <div class="footer-links-col">
+          <a href="page6.html">OUR ISSUES</a>
+          <a href="page7.html">SUBMIT FOR ISSUE</a>
         </div>
       </div>
     </div>

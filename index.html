@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Inter:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <style>
+    @font-face { font-family: 'Kabisat Demo-ItalicTall'; src: url('Kabisat Demo-ItalicTall.ttf'); }
+    @font-face { font-family: 'Lyzero'; src: url('Lyzero DEMO.ttf'); }
+    @font-face { font-family: 'Danfo'; src: url('Lyzero DEMO.ttf'); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
@@ -71,7 +74,7 @@
       padding: 22px 30px;
     }
 
-    /* 3-Column Newspaper Grid (Matches 2nd Image Exactly) */
+    /* 3-Column Newspaper Grid */
     .articles-grid {
       display: grid;
       grid-template-columns: repeat(3, 320px);
@@ -80,7 +83,6 @@
       grid-auto-flow: dense;
     }
 
-    /* Works for both old build.js (.article-card) and new build.js (.card-1tile / .card-2tile) */
     .article-card {
       padding: 14px 22px;
       border-right: 1.5px solid #1f1b19;
@@ -91,15 +93,13 @@
       cursor: pointer;
       background-color: #fffefe;
       overflow: hidden;
-      grid-row: span 2; /* Default 2-tile if image is present */
+      grid-row: span 2;
     }
 
-    /* Left vertical line on the first column (Matches 2nd Image) */
     .articles-grid > .article-card:nth-child(3n+1) {
       border-left: 1.5px solid #1f1b19;
     }
 
-    /* Remove bottom border when there is only 1 row (Matches 2nd Image) */
     .articles-grid > .article-card:last-child,
     .articles-grid > .article-card:nth-last-child(-n+3) {
       border-bottom: none;
@@ -114,8 +114,7 @@
       grid-row: span 2 !important;
     }
 
-    /* Forces image to the top even if old build.js was used */
-   .card-image {
+    .card-image {
       order: 1;
       width: 100%;
       height: 220px;
@@ -157,15 +156,6 @@
     }
     .card-snippet {
       order: 5;
-      font-size: 18px;
-      font-style: normal;
-      line-height: 1.35;
-      color: #1f1b19;
-      text-align: left;
-      overflow-wrap: break-word;
-    }/
-    }
-    .card-snippet {
       font-size: 18px;
       font-style: normal;
       line-height: 1.35;
@@ -247,7 +237,7 @@
       background-color: #fffefe;
     }
     .footer-inner {
-      max-width: 1020px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -287,14 +277,21 @@
       column-gap: 80px;
       row-gap: 10px;
     }
-    .footer-links-grid a {
+    .footer-links-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 10px;
+    }
+    .footer-links-grid a,
+    .footer-links-col a {
       font-size: 19px;
       font-style: normal;
       text-transform: uppercase;
       color: #1f1b19;
       text-decoration: none;
     }
-    .footer-links-grid a:hover { text-decoration: underline; }
+    .footer-links-grid a:hover,
+    .footer-links-col a:hover { text-decoration: underline; }
 
     @media (max-width: 1040px) {
       .articles-grid { grid-template-columns: repeat(2, 1fr); }
@@ -332,38 +329,35 @@
 
         <article class="article-card card-2tile" data-category="art-photo" onclick="openArticle('Borsch', 'Art%5CPhoto', 'P%27udell', 'borsch.jpg', 'To%20support%20the%20author%2C%20please%20transfer%20the%20channel%20to%20Telegram%3Ahttps%3A%2F%2Ft.me%2Fpudelli.%3Cbr%3E%20I%27m%20a%20teenager%20from%20Ukraine.%20I%27m%20an%20aspiring%20creator%20who%20wants%20to%20share%20my%20ideas%20with%20the%20masses.%20This%20artwork%20is%20an%20interpretation%20of%20the%20work%20of%20Ukrainian%20director%20and%20streamer%20Kirill%20Ami.%20It%27s%20his%20first%20attempt%20at%20reaching%20the%20masses.%20%3Cbr%3EI%27ll%20be%20hosting%20streams%20on%20topics%20including%20psychology%2C%20art%2C%20neuroscience%2C%20and%20philosophy.%20%3Cbr%3EMy%20signature%20is%20%22diff%2C%22%20short%20for%20%22different.%22%20For%20me%2C%20this%20carries%20a%20symbolic%20meaning%20about%20how%20different%20we%20all%20are.')">
           <img src="borsch.jpg" alt="Borsch" class="card-image">
-       <div class="card-text">
+          <div class="card-text">
             <div class="card-category">Art\Photo</div>
             <div class="card-author">P'udell</div>
             <h2 class="card-title">Borsch</h2>
             <p class="card-snippet">To support the author, please transfer the channel to T....................</p>
           </div>
-          
         </article>
         
-        <article class="article-card card-2tile" data-category="entertainment" onclick="openArticle('Swift%27s%20classmates%20acclaims%20to%20be%20%22more%20talented%20than%20her%22', 'Entertainment', 'Cortney%20dotdotdot', 'Arielle.jpg', 'Taylor%20Swift%27s%20classmate%20Arielle%20Peppers%20joined%20today%27s%20%22TMZ%20Live%22%20to%20discuss%20the%20scandalous%20%223%20pairs%20of%20Uggs%22%20Vanity%20Fair%20article.%20%22I%27m%20equally%20as%20talented%2C%22%20Peppers%20says%20in%20the%20very%20first%20seconds%20of%20the%20video.%3Cbr%3E%3Cbr%3E%22I%20think%20it%20was%20fair%2C%22%20she%20says%20when%20the%20interviewer%20asks%20her%2C%20%22Do%20you%20think%20the%20Vanity%20Fair%20article%20did%20her%20(Swift)%20dirty%3F%22%20Peppers%20then%20continues%2C%20%22It%27s%20about%2C%20%27Don%27t%20forget%20where%20you%20came%20from%27%E2%80%94you%27re%20not%20from%20Nashville.%22%3Cbr%3E%3Cbr%3EEven%20though%20the%20viral%20video%20is%20distributed%20as%20Arielle%27s%20commentary%20on%20Vanity%20Fair%27s%20article%2C%20she%20mostly%20talks%20about%20being%20equal%E2%80%94and%20even%20superior%E2%80%94to%20Taylor.%20%22She%27s%20got%20a%20lucky%20hand...%20But%20I%27ve%20got%20a%20blessed%20hand%2C%22%20Peppers%20says%20in%20response%20to%20a%20final%20question.%3Cbr%3E%3Cbr%3EWatch%20Arielle%20Peppers%27%20responses%20and%20read%20the%20whole%20article%20on%20TMZ%20Live%3A%20https%3A%2F%2Fwww.tmz.com%2F2026%2F11%2F24%2Ftaylor-swift-classmate-says-singer-got-lucky-with-career')">
-          
-       <div class="card-text">
+        <article class="article-card card-2tile" data-category="entertainment" onclick="openArticle('Swift%27s%20classmate%20claims%20to%20be%20%22more%20talented%20than%20her%22', 'Entertainment', 'Courtney%20Dotdotdot', 'Arielle.jpg', 'Taylor%20Swift%27s%20classmate%20Arielle%20Peppers%20joined%20today%27s%20%22TMZ%20Live%22%20to%20discuss%20the%20scandalous%20%223%20pairs%20of%20Uggs%22%20Vanity%20Fair%20article.%20%22I%27m%20equally%20as%20talented%2C%22%20Peppers%20says%20in%20the%20very%20first%20seconds%20of%20the%20video.%3Cbr%3E%3Cbr%3E%22I%20think%20it%20was%20fair%2C%22%20she%20says%20when%20the%20interviewer%20asks%20her%2C%20%22Do%20you%20think%20the%20Vanity%20Fair%20article%20did%20her%20(Swift)%20dirty%3F%22%20Peppers%20then%20continues%2C%20%22It%27s%20about%2C%27Don%27t%20forget%20where%20you%20came%20from%27%E2%80%94you%27re%20not%20from%20Nashville.%22%3Cbr%3E%3Cbr%3EEven%20though%20the%20viral%20video%20is%20distributed%20as%20Arielle%27s%20commentary%20on%20Vanity%20Fair%27s%20article%2C%20she%20mostly%20talks%20about%20being%20equal%E2%80%94and%20even%20superior%E2%80%94to%20Taylor.%20%22She%27s%20got%20a%20lucky%20hand...%20But%20I%27ve%20got%20a%20blessed%20hand%2C%22%20Peppers%20says%20in%20response%20to%20a%20final%20question.%3Cbr%3E%3Cbr%3EWatch%20Arielle%20Peppers%27%20responses%20and%20read%20the%20whole%20article%20on%20TMZ%20Live%3A%20https%3A%2F%2Fwww.tmz.com%2F2026%2F11%2F24%2Ftaylor-swift-classmate-says-singer-got-lucky-with-career')">
+          <div class="card-text">
             <div class="card-category">Entertainment</div>
-            <div class="card-author">Cortney dotdotdot</div>
-            <h2 class="card-title">Swift's classmates acclaims to be "more talented than her"</h2>
+            <div class="card-author">Courtney Dotdotdot</div>
+            <h2 class="card-title">Swift's classmate claims to be "more talented than her"</h2>
             <p class="card-snippet">Taylor Swift's classmate Arielle Peppers joined today's....................</p>
           </div>
-          <img src="Arielle.jpg" alt="Swift's classmates acclaims to be 'more talented than her'" class="card-image">
+          <img src="Arielle.jpg" alt="Swift's classmate claims to be 'more talented than her'" class="card-image">
         </article>
         
         <article class="article-card card-2tile" data-category="art-photo" onclick="openArticle('The%20suddenness%20of%20Time', 'Art%5CPhoto', 'P%27udell', 'Time.png', 'To%20support%20the%20author%2C%20please%20transfer%20the%20channel%20to%20Telegram%3A%20https%3A%2F%2Ft.me%2Fpudelli.%3Cbr%3EI%27m%20a%20teenager%20from%20Ukraine.%20I%27m%20an%20aspiring%20creator%20who%20wants%20to%20share%20my%20ideas%20with%20the%20masses.%20%3Cbr%3EThis%20painting%20depicts%20a%20classic%20Slavic%20grandmother%20in%20a%20signature%20red%20beret.%20This%20painting%20embodies%20the%20problem%20of%20rapid%2C%20premature%20old%20age%20for%20many%20people%20and%20the%20general%20fear%20of%20aging.%20Although%20in%20this%20fear%2C%20one%20can%20find%20beauty.')">
           <img src="Time.png" alt="The suddenness of Time" class="card-image">
-       <div class="card-text">
+          <div class="card-text">
             <div class="card-category">Art\Photo</div>
             <div class="card-author">P'udell</div>
             <h2 class="card-title">The suddenness of Time</h2>
             <p class="card-snippet">To support the author, please transfer the channel to T....................</p>
           </div>
-          
         </article>
         
-<!-- ARTICLES_END -->
+        <!-- ARTICLES_END -->
       </div>
 
       <div id="empty-state" class="empty-state" style="display: block;">
@@ -392,6 +386,13 @@
           <a href="page4.html">DONATE</a>
         </div>
       </div>
+      <div>
+        <div class="footer-links-title">ISSUES</div>
+        <div class="footer-links-col">
+          <a href="page6.html">OUR ISSUES</a>
+          <a href="page7.html">SUBMIT FOR ISSUE</a>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -408,7 +409,6 @@
       let visibleCount = 0;
 
       cards.forEach(card => {
-        /* Automatically set 1-tile if no image is inside the card */
         if (!card.querySelector('img')) {
           card.classList.add('card-1tile');
         } else {
